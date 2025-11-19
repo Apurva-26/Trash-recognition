@@ -1,5 +1,5 @@
 import torch
-from torch import nn, optim
+from torch import nn
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
@@ -22,7 +22,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f'Using device: {device}')
 
 
-dataset_path = r"C:\Users\apurv\Downloads\archive real\garbage_classification"
+dataset_path = r"#ADD FILE PATH"
 
 
 train_transform = transforms.Compose([
@@ -56,7 +56,6 @@ generator = torch.Generator().manual_seed(seed)
 train_dataset_raw, test_dataset_raw, val_dataset_raw = torch.utils.data.random_split(
     dataset, [train_size, test_size, val_size], generator=generator
 )
-# train_dataset_raw, test_dataset_raw, val_dataset_raw = torch.utils.data.random_split(dataset, [train_size, test_size, val_size])
 
 
 train_dataset_raw.dataset.transform = train_transform
@@ -92,7 +91,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.fc.parameters(), lr=0.001)  # only training final layer
 
 
-epochs = 10
+epochs = #ENTER NUMBER OF EPOCHS
 for epoch in range(epochs):
     model.train()
     running_loss = 0.0
@@ -150,4 +149,5 @@ _, preds = torch.max(outputs, 1)
 
 for i in range(10):
     imshow(images[i].cpu(), f'Pred: {class_names[preds[i]]}, Actual: {class_names[labels[i]]}')
+
 
